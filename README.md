@@ -29,6 +29,44 @@ The source IPs span multiple countries, with a notable cluster originating from 
 
 ---
 
+## 🔧 Steps Taken
+
+The following steps were carried out to respond to and mitigate the brute-force attack:
+
+1. **Identified Unauthorized Login Attempts**
+   - Detected 16 failed logon events on the system `window-stiggy`
+   - Isolated 12 unique external IP addresses as the source
+   - Noted abnormal volume from IP `95.214.55.202` (86 attempts)
+
+2. **Performed IP Reputation Analysis**
+   - Geo-located IPs using public IP lookup services
+   - Identified multiple high-risk IPs from known hosting providers (e.g., JSC Selectel)
+
+3. **Created Indicators of Compromise (IoCs)**
+   - Documented all attacker IPs, attempt counts, ISPs, and threat levels
+   - Mapped Event ID `4625` as the primary detection log
+
+4. **Deployed Firewall Blocks**
+   - Developed and executed a PowerShell script to block all malicious IPs via Windows Defender Firewall
+   - Grouped rules under `Blocked Malicious IPs` for easy management
+
+5. **Hardened Access Controls**
+   - Reviewed and reinforced local security policies:
+     - Strong password enforcement
+     - Account lockout thresholds
+     - Disabled unused or default accounts
+     - Consideration of MFA implementation
+
+6. **Enabled Monitoring and Alerting**
+   - Enabled logging and alerting for repeated login failures
+   - Began monitoring for future access attempts from foreign or known TOR exit nodes
+
+7. **Documented the Incident**
+   - Compiled full threat report in Markdown format
+   - Included all IoCs, detection context, and remediation steps for audit/compliance
+
+---
+
 
 
 
