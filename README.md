@@ -24,14 +24,8 @@ The source IPs span multiple countries, with a notable cluster originating from 
 - ✅ **Enabled monitoring** for future failed logins and unauthorized TOR usage
 
 > This report includes a PowerShell script to automate blocking of all identified malicious IPs and provides context for detection and incident response.
+![Screenshot 2025-04-28 at 23-54-25 Advanced hunting - Microsoft Defender](https://github.com/user-attachments/assets/c81bb33c-13a8-4084-ad8c-84ac7917b3ee)
 
-
-DeviceLogonEvents
-| where DeviceName == "window-stiggy"
-| where LogonType has_any("Network", "Interactive", "RemoteInteractive", "Unlock")
-| where ActionType == "LogonFailed"
-| summarize Attempts = count() by ActionType, RemoteIP, DeviceName
-| order by Attempts
 
 ---
 
