@@ -25,6 +25,14 @@ The source IPs span multiple countries, with a notable cluster originating from 
 
 > This report includes a PowerShell script to automate blocking of all identified malicious IPs and provides context for detection and incident response.
 
+
+DeviceLogonEvents
+| where DeviceName == "window-stiggy"
+| where LogonType has_any("Network", "Interactive", "RemoteInteractive", "Unlock")
+| where ActionType == "LogonFailed"
+| summarize Attempts = count() by ActionType, RemoteIP, DeviceName
+| order by Attempts
+
 ---
 
 
