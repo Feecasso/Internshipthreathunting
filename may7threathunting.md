@@ -34,40 +34,7 @@ DeviceLogonEvents
 | **185.243.96.116** | 19              | Google                         | Unknown               | Possibly misattributed, further review needed |
 | **185.243.96.107** | 16              | GTT Communications Inc.        | Palisades, NY, USA    | Netblock: 185.243.96.0/22                     |
 
-## ⚠️ Risk Assessment
 
-- **Attack Type:** Credential-based brute-force attempt  
-- **Source:** VPNs, data centers, anonymizing infrastructure
-
-**Indicators of Risk:**
-- High volume of failed login attempts  
-- Repeated activity from known abusive or obfuscated IPs  
-- IPs tied to anonymization and hosting services
-
-**Potential Impact:**
-- Account compromise  
-- Privilege escalation  
-- Lateral movement
-
----
-
-## 🛠️ Recommended Actions
-
-- **Block IPs:** Add all identified IPs to firewall and security blocklists.  
-- **Enable Account Lockout:** Apply automatic lockouts after defined failed attempts.  
-- **Monitor & Alert:** Set up alerts for abnormal failed login rates.  
-- **Audit Logs:** Review logs for successful logins from suspect IPs.  
-- **Harden Access Controls:** Implement MFA and review least privilege policies.  
-- **Add ASN Watchlist:** Monitor ASN `AS210848` and similar high-abuse sources.
-
----
-
-## ✅ Summary
-
-A brute-force login attempt targeting the `windows-cyber` VM was detected. The attack originated from multiple suspicious IP addresses, including VPNs and high-abuse hosting providers. These findings confirm deliberate unauthorized access attempts requiring immediate response.
-
-> **Status:** 🚨 Active Threat  
-> **Action Required:** Block offending IPs, enhance authentication defenses, and audit potentially compromised accounts.
 
 
 
