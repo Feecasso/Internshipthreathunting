@@ -16,15 +16,8 @@ To identify and assess potential brute-force attack activity targeting the endpo
 ## 🔍 Methodology
 
 A KQL query was executed to analyze failed login attempts:
+![Screenshot 2025-05-07 at 13-41-48 Advanced hunting - Microsoft Defender](https://github.com/user-attachments/assets/d4fed5d0-71df-4dc2-acbb-91154be8da3c)
 
-
-let TargetDevice = "windows-cyber";
-DeviceLogonEvents
-| where DeviceName == TargetDevice
-| where ActionType == "LogonFailed"
-| project Timestamp, ActionType, DeviceName, AccountName, RemoteIP
-| summarize FailedAttempts = count() by RemoteIP
-| sort by FailedAttempts desc
 
 A KQL query was executed to analyze failed login attempts:
 
