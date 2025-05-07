@@ -34,7 +34,6 @@ Investigate suspicious download activity on the `window-cyber` machine, specific
 ### 1. **Verify the File on the System**
 To ensure the downloaded file exists and has been properly logged, use the following query to check its presence on disk:
 
-```kusto
 DeviceFileEvents
 | where DeviceName == "window-cyber"
 | where FileName contains "tiktok"
@@ -56,6 +55,8 @@ DeviceProcessEvents
     If the file is confirmed to be malicious, block the download source (store-images.s-microsoft.com) on firewalls and endpoint security solutions.
 
     Perform a full malware scan and isolate the window-cyber machine until confirmed clean.
+
+
 
 🧩 Additional Context
 
