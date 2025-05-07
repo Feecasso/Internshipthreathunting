@@ -18,6 +18,17 @@ To identify and assess potential brute-force attack activity targeting the endpo
 A KQL query was executed to analyze failed login attempts:
 
 
+let TargetDevice = "windows-cyber";
+DeviceLogonEvents
+| where DeviceName == TargetDevice
+| where ActionType == "LogonFailed"
+| project Timestamp, ActionType, DeviceName, AccountName, RemoteIP
+| summarize FailedAttempts = count() by RemoteIP
+| sort by FailedAttempts desc
+
+A KQL query was executed to analyze failed login attempts:
+
+
 
 
 | Remote IP          | Failed Attempts | Owner / ISP                    | Location              | Notes / Abuse Reports                         |
