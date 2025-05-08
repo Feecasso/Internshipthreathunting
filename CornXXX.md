@@ -6,36 +6,9 @@ Detection Tool: Microsoft Defender for Endpoint
 Query Language: Kusto Query Language (KQL)
 🎯 Objective
 
+
+
 Investigate potentially suspicious download activity involving files with names or extensions referencing "corn photos" on the window-cyber machine. These downloads may be benign or could indicate attempted malware delivery or phishing via deceptive media files.
-🔍 Key Findings
-
-    Suspicious Downloads Identified
-    Multiple image and archive files related to "corn" were downloaded. These may represent attempts to obfuscate malicious payloads behind harmless file types.
-
-    Screenshot: Advanced Hunting Console
-
-    Downloaded File Names:
-
-        corn_photo_1.jpg
-
-        corn_images.zip
-
-        corn_collection.png
-
-    Notable Details:
-
-        Timestamps: Several downloads on May 7, 2025, at irregular but clustered intervals.
-
-        Associated Processes:
-
-            chrome.exe
-
-            msedge.exe
-
-        Download Sources:
-        Involve unfamiliar or potentially malicious domains.
-
-    `-______
 
 🧪 Follow-Up Actions
 1. Confirm File Presence on Endpoint
@@ -69,6 +42,37 @@ DeviceNetworkEvents
 | order by Timestamp desc
 
 4. Contain and Block Malicious Sources
+🔍 Key Findings
+
+    Suspicious Downloads Identified
+    Multiple image and archive files related to "corn" were downloaded. These may represent attempts to obfuscate malicious payloads behind harmless file types.
+
+    Screenshot: Advanced Hunting Console
+
+    Downloaded File Names:
+
+        corn_photo_1.jpg
+
+        corn_images.zip
+
+        corn_collection.png
+
+    Notable Details:
+
+        Timestamps: Several downloads on May 7, 2025, at irregular but clustered intervals.
+
+        Associated Processes:
+
+            chrome.exe
+
+            msedge.exe
+
+        Download Sources:
+        Involve unfamiliar or potentially malicious domains.
+
+    `-______
+
+
 
 If threat indicators are validated:
 
