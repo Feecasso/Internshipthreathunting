@@ -18,6 +18,9 @@ Investigate suspicious download activity on the `window-cyber` machine, specific
 - **Suspicious Download:**  
   Several image files related to "corn photos" have been downloaded to the system. These could indicate possible phishing or data exfiltration activities disguised as harmless media files.
 
+![Screenshot 2025-05-07 at 17-06-38 Advanced hunting - Microsoft Defender](https://github.com/user-attachments/assets/8b0f129b-bfa1-4217-8f79-3cda944c4349)
+
+
   - **File Names:**  
     - `corn_photo_1.jpg`
     - `corn_images.zip`
