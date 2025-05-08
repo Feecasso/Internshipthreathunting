@@ -10,38 +10,7 @@ Query Language: Kusto Query Language (KQL)
 
 Investigate potentially suspicious download activity involving files with names or extensions referencing "corn photos" on the window-cyber machine. These downloads may be benign or could indicate attempted malware delivery or phishing via deceptive media files.
 
-🧪 Follow-Up Actions
-1. Confirm File Presence on Endpoint
 
-Use the following query to identify file creation events:
-
-DeviceFileEvents
-| where DeviceName == "window-cyber"
-| where FileName contains "corn"
-| project Timestamp, FileName, FolderPath, InitiatingProcessAccountName, SHA256
-| order by Timestamp desc
-
-2. Check for File Execution
-
-Determine whether the files were opened or executed, indicating possible compromise:
-
-DeviceProcessEvents
-| where DeviceName == "window-cyber"
-| where FileName contains "corn"
-| project Timestamp, FileName, ProcessCommandLine, InitiatingProcessAccountName
-| order by Timestamp desc
-
-3. Inspect Network Connections for Malicious Domains
-
-Identify download sources and their IPs to assess risk:
-
-DeviceNetworkEvents
-| where DeviceName == "window-cyber"
-| where RemoteUrl has_any ("corn") or RemoteUrl endswith ".zip" or RemoteUrl endswith ".jpg" or RemoteUrl endswith ".png"
-| project Timestamp, RemoteUrl, InitiatingProcessFileName, RemoteIP, Protocol
-| order by Timestamp desc
-
-4. Contain and Block Malicious Sources
 🔍 Key Findings
 
     Suspicious Downloads Identified
@@ -70,8 +39,37 @@ DeviceNetworkEvents
         Download Sources:
         Involve unfamiliar or potentially malicious domains.
 
-    `-______
+        🧪 Follow-Up Actions
 
+    Confirm File Presence on Endpoint
+
+    Use the following query to identify file creation events:
+
+    DeviceFileEvents
+    | where DeviceName == "window-cyber"
+    | where FileName contains "corn"
+    | project Timestamp, FileName, FolderPath, InitiatingProcessAccountName, SHA256
+    | order by Timestamp desc
+
+Check for File Execution
+
+Determine whether the files were opened or executed, indicating possible compromise:
+
+    DeviceProcessEvents
+    | where DeviceName == "window-cyber"
+    | where FileName contains "corn"
+    | project Timestamp, FileName, ProcessCommandLine, InitiatingProcessAccountName
+    | order by Timestamp desc
+
+Inspect Network Connections for Malicious Domains
+
+Identify download sources and their IPs to assess risk:
+
+    DeviceNetworkEvents
+    | where DeviceName == "window-cyber"
+    | where RemoteUrl has_any ("corn") or RemoteUrl endswith ".zip" or RemoteUrl endswith ".jpg" or RemoteUrl endswith ".png"
+    | project Timestamp, RemoteUrl, InitiatingProcessFileName, RemoteIP, Protocol
+    | order by Timestamp desc
 
 
 If threat indicators are validated:
@@ -94,6 +92,8 @@ The window-cyber system shows multiple downloads of image and archive files labe
 
 Status: 🚨 Active Threat
 Immediate Actions:
+
+    
 
     Isolate host
 
