@@ -1,44 +1,44 @@
-# 🛡️ Threat Hunting Report: Suspicious Download of "Corn Photos"
+🛡️ Threat Hunting Report: Suspicious Download Activity – "Corn Photos"
 
-**Report Date:** 2025-05-07  
-**Device Name:** `window-cyber`  
-**Detection Tool:** Microsoft Defender for Endpoint  
-**Query Language:** Kusto Query Language (KQL)  
+Report Date: 2025-05-07
+Device Name: window-cyber
+Detection Tool: Microsoft Defender for Endpoint
+Query Language: Kusto Query Language (KQL)
+🎯 Objective
 
----
+Investigate potentially suspicious download activity involving files with names or extensions referencing "corn photos" on the window-cyber machine. These downloads may be benign or could indicate attempted malware delivery or phishing via deceptive media files.
+🔍 Key Findings
 
-## 🎯 Objective
+    Suspicious Downloads Identified
+    Multiple image and archive files related to "corn" were downloaded. These may represent attempts to obfuscate malicious payloads behind harmless file types.
 
-Investigate suspicious download activity on the `window-cyber` machine, specifically focusing on the download of files with names or extensions related to "corn photos," which may indicate either benign or malicious activity depending on the source.
+    Screenshot: Advanced Hunting Console
 
----
+    Downloaded File Names:
 
-## 🔍 Key Findings
+        corn_photo_1.jpg
 
-- **Suspicious Download:**  
-  Several image files related to "corn photos" have been downloaded to the system. These could indicate possible phishing or data exfiltration activities disguised as harmless media files.
+        corn_images.zip
 
-![Screenshot 2025-05-07 at 17-06-38 Advanced hunting - Microsoft Defender](https://github.com/user-attachments/assets/8b0f129b-bfa1-4217-8f79-3cda944c4349)
+        corn_collection.png
 
+    Notable Details:
 
-  - **File Names:**  
-    - `corn_photo_1.jpg`
-    - `corn_images.zip`
-    - `corn_collection.png`
-  - **Download Source:**  
-    Multiple downloads from suspicious domains, potentially malicious in nature.
-  - **Timestamp:**  
-    Various timestamps throughout May 7, 2025, showing an unusual frequency of downloads.
-  - **Associated Process:**  
-    The files were downloaded using **web browsers** such as `chrome.exe` and `msedge.exe`.
+        Timestamps: Several downloads on May 7, 2025, at irregular but clustered intervals.
 
+        Associated Processes:
 
+            chrome.exe
 
-## 🧪 Follow-Up Actions
+            msedge.exe
 
-### 1. **Verify the Files on the System**
-To ensure the downloaded files exist and are properly logged, run the following query to check their presence:
+        Download Sources:
+        Involve unfamiliar or potentially malicious domains.
 
+🧪 Follow-Up Actions
+1. Confirm File Presence on Endpoint
+
+Use the following query to identify file creation events:
 
 DeviceFileEvents
 | where DeviceName == "window-cyber"
@@ -46,9 +46,9 @@ DeviceFileEvents
 | project Timestamp, FileName, FolderPath, InitiatingProcessAccountName, SHA256
 | order by Timestamp desc
 
-2. Check for Execution of the Files
+2. Check for File Execution
 
-Determine if any of the downloaded files were executed, which could indicate that they contain embedded scripts or payloads.
+Determine whether the files were opened or executed, indicating possible compromise:
 
 DeviceProcessEvents
 | where DeviceName == "window-cyber"
@@ -56,76 +56,63 @@ DeviceProcessEvents
 | project Timestamp, FileName, ProcessCommandLine, InitiatingProcessAccountName
 | order by Timestamp desc
 
-3. Check Source Domains for Suspicious Behavior
+3. Inspect Network Connections for Malicious Domains
 
-Identify the domains from which the images or archives were downloaded to confirm if they are known malicious or hosting suspicious content.
+Identify download sources and their IPs to assess risk:
 
 DeviceNetworkEvents
 | where DeviceName == "window-cyber"
-| where RemoteUrl contains "corn" or RemoteUrl endswith ".zip" or RemoteUrl endswith ".jpg" or RemoteUrl endswith ".png"
+| where RemoteUrl has_any ("corn") or RemoteUrl endswith ".zip" or RemoteUrl endswith ".jpg" or RemoteUrl endswith ".png"
 | project Timestamp, RemoteUrl, InitiatingProcessFileName, RemoteIP, Protocol
 | order by Timestamp desc
 
 4. Contain and Block Malicious Sources
 
-If the downloads are confirmed to be malicious, block the URLs and IP addresses involved on the firewall and endpoint security tools. Perform a full malware scan.
-🧩 Additional Context
+If threat indicators are validated:
 
-    Source URLs:
-    Unusual or suspicious URLs related to the "corn photos" might indicate an attacker's attempt to distribute malware under the guise of benign images.
+    Add suspicious domains and IPs to blocklists.
 
-    File Analysis:
+    Isolate the endpoint from the network.
 
-        If downloaded archives (like .zip) are found, inspect their contents for executable files, which could be disguised as images.
-
-        Perform hash analysis (SHA256) on the files to compare them against threat intelligence databases.
+    Initiate a full malware scan via Defender for Endpoint.
 
 ⚠️ Risk Assessment
-
-    Attack Type: Suspicious download of images, possibly containing malware
-
-    Source: Potential phishing or malware distribution via social engineering
-
-    Indicators of Risk:
-
-        Repeated downloads of image files with themes like "corn photos"
-
-        Suspicious URLs or domains
-
-        Archives containing images with potential hidden payloads
-
-Potential Impact:
-
-    Malware execution
-
-    Data exfiltration
-
-    Social engineering for future attacks
-
+Category	Details
+Attack Type	Potential malware distribution disguised as image downloads
+Source	Possibly phishing or drive-by download campaign
+Risk Indicators	Repeated downloads, uncommon file sources, archive files posing as images
+Potential Impact	Malware execution, system compromise, data exfiltration
 🚨 Summary
 
-Multiple suspicious downloads related to "corn photos" were detected on the window-cyber machine, possibly indicating an attempt to disguise malicious files. Immediate actions include verifying the files, inspecting the download source, and performing a malware scan.
+The window-cyber system shows multiple downloads of image and archive files labeled as "corn photos." While some may be harmless, others may disguise malicious content. Continued analysis and immediate remediation are recommended.
 
-    Status: 🚨 Active Threat
+Status: 🚨 Active Threat
+Immediate Actions:
 
-    Action Required: Isolate the machine, verify file integrity, perform malware scanning, and block any malicious sources.
+    Isolate host
+
+    Verify file contents and hashes
+
+    Scan for malware
+
+    Block malicious URLs/IPs
 
 🛠️ Recommended Actions
 
-    File Verification: Use KQL queries to confirm file presence and execution.
+    File Verification: Confirm presence and examine file hashes using Defender or KQL.
 
-    Network Isolation: Block the suspicious URLs or IPs from which the files were downloaded.
+    Network Isolation: Block involved domains and restrict outbound traffic from the host.
 
-    Full System Scan: Run a full antivirus and anti-malware scan on window-cyber to detect potential threats.
+    Threat Scan: Initiate antivirus/anti-malware scan.
 
-    Enhance Defense Posture: Implement controls to restrict the download of files from untrusted or unknown sources.
+    Policy Review: Implement restrictions on downloading files from unknown sources.
 
-Threat Intelligence Tags:
+🧠 Threat Intelligence Tags
 
     Malicious Download
 
-    Phishing
+    Phishing via Media Files
 
-    Malware Distribution via Images
+    Image-based Malware Delivery
 
-    Suspicious File Behavior
+    Suspicious Archive File Behavior
