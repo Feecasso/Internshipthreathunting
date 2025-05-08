@@ -13,6 +13,11 @@ Investigate potentially suspicious download activity involving files with names 
 
 🔍 Key Findings
 
+
+![Screenshot 2025-05-07 at 17-06-38 Advanced hunting - Microsoft Defender](https://github.com/user-attachments/assets/81e25a8f-5439-4774-ae65-0374b7cd0d1f)
+
+
+
     Suspicious Downloads Identified
     Multiple image and archive files related to "corn" were downloaded. These may represent attempts to obfuscate malicious payloads behind harmless file types.
 
