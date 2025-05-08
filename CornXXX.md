@@ -1,14 +1,14 @@
-##🛡️ Threat Hunting Report: Suspicious Download Activity – "Corn Photos"
+## 🛡️ Threat Hunting Report: Suspicious Download Activity – "Corn Photos"
 
-Report Date: 2025-05-07
-Device Name: window-cyber
-Detection Tool: Microsoft Defender for Endpoint
-Query Language: Kusto Query Language (KQL)
-🎯 Objective
+**Report Date:** 2025-05-07  
+**Device Name:** window-cyber  
+**Detection Tool:** Microsoft Defender for Endpoint  
+**Query Language:** Kusto Query Language (KQL)  
 
-
+### 🎯 Objective
 
 Investigate potentially suspicious download activity involving files with names or extensions referencing "corn photos" on the window-cyber machine. These downloads may be benign or could indicate attempted malware delivery or phishing via deceptive media files.
+
 
 
 🔍 Key Findings
