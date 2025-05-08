@@ -37,21 +37,21 @@ Investigate suspicious download activity on the `window-cyber` machine, specific
 ### 1. **Verify the File on the System**
 To ensure the downloaded file exists and has been properly logged, use the following query to check its presence on disk:
 
-DeviceFileEvents
-| where DeviceName == "window-cyber"
-| where FileName contains "tiktok"
-| project Timestamp, FileName, FolderPath, InitiatingProcessAccountName, SHA256
-| order by Timestamp desc
+  DeviceFileEvents
+  | where DeviceName == "window-cyber"
+  | where FileName contains "tiktok"
+  | project Timestamp, FileName, FolderPath, InitiatingProcessAccountName, SHA256
+  | order by Timestamp desc
 
 2. Check for Execution of the File
 
 Determine if the downloaded file was executed on the system, indicating it could have been run as part of a larger attack chain.
 
-DeviceProcessEvents
-| where DeviceName == "window-cyber"
-| where FileName contains "tiktok"
-| project Timestamp, FileName, ProcessCommandLine, InitiatingProcessAccountName
-| order by Timestamp desc
+  DeviceProcessEvents
+  | where DeviceName == "window-cyber"
+  | where FileName contains "tiktok"
+  | project Timestamp, FileName, ProcessCommandLine, InitiatingProcessAccountName
+  | order by Timestamp desc
 
 3. Block and Contain
 
