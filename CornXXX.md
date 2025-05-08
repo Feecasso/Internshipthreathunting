@@ -32,7 +32,7 @@ Investigate suspicious download activity on the `window-cyber` machine, specific
   - **Associated Process:**  
     The files were downloaded using **web browsers** such as `chrome.exe` and `msedge.exe`.
 
----
+
 
 ## 🧪 Follow-Up Actions
 
