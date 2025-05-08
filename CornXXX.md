@@ -42,8 +42,9 @@ Investigate potentially suspicious download activity involving files with names 
         🧪 Follow-Up Actions
 
     Confirm File Presence on Endpoint
+    
 
-    Use the following query to identify file creation events:
+ Use the following query to identify file creation events:
 
     DeviceFileEvents
     | where DeviceName == "window-cyber"
