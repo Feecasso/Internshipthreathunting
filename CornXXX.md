@@ -82,10 +82,8 @@ If threat indicators are validated:
     Initiate a full malware scan via Defender for Endpoint.
 
 ⚠️ Risk Assessment
-Category	Details
-Attack Type	Potential malware distribution disguised as image downloads
-Source	Possibly phishing or drive-by download campaign
-Risk Indicators	Repeated downloads, uncommon file sources, archive files posing as images
+Category	DetailsAttack Type	Potential malware distribution disguised as image downloads Source	Possibly phishing or drive-by download campaignRisk Indicators	Repeated downloads, uncommon file sources, archive files posing as images
+
 Potential Impact	Malware execution, system compromise, data exfiltration
 🚨 Summary
 
