@@ -35,6 +35,8 @@ Investigate potentially suspicious download activity involving files with names 
         Download Sources:
         Involve unfamiliar or potentially malicious domains.
 
+    `-______
+
 🧪 Follow-Up Actions
 1. Confirm File Presence on Endpoint
 
